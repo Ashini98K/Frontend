@@ -1,0 +1,88 @@
+.topic {
+  font-family: Poly;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 96px;
+  line-height: 114px;
+  padding-top: 3rem;
+}
+
+.subTopic {
+  font-family: Poly;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 29px;
+}
+
+.login {
+  font-family: Poly;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 48px;
+  line-height: 50px;
+  text-align: right;
+  padding-top: 10rem;
+}
+
+.instructions {
+  font-family: Poly;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 25px;
+  text-align: right;
+}
+
+.input_field {
+  width: 60vh;
+  height: 7vh;
+  margin-top: 2rem;
+  margin-left: 10rem;
+  top: 502px;
+  background: #ededed;
+  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 60px;
+  padding-left: 3rem;
+}
+
+.input_field:hover {
+  background: rgba(185, 172, 238, 0.63);
+  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 60px;
+}
+
+.mailIcon {
+  /*position: absolute;*/
+  width: 60vh;
+  /*margin-top: 1rem;*/
+  /*margin-left: 10rem;*/
+  /*top: 502px;*/
+}
+
+.loginbutton {
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 93px;
+  width: 175px;
+  height: 55px;
+  margin-top: 2vh;
+  align-self: center;
+  text-align: center;
+  border-width: 0pt;
+  /*margin-left: 22rem;*/
+}
+
+.btnTxt {
+  font-family: Share;
+  font-style: normal;
+  font-weight: normal;
+}
+
+.loginbutton:hover {
+  background: #341e71;
+  color: #ffffff;
+}
+
+.imgDiv {
+  height: 50vh;
+}
