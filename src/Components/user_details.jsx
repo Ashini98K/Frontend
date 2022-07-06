@@ -4,6 +4,7 @@ import RegisterCss from "../Stylesheets/register.css";
 import axios from "axios";
 import { Player, Controls } from "@lottiefiles/react-lottie-player";
 import { matchRoutes, useParams } from "react-router-dom";
+import BASEURL from "../url";
 
 class userInformation extends Component {
   constructor(props) {
@@ -31,7 +32,7 @@ class userInformation extends Component {
     const path = window.location.pathname.split("/");
     const id = path[path.length - 1];
 
-    axios.get(`http://localhost:8080/user/get/id/${id}`).then((response) => {
+    axios.get(`${BASEURL}user/get/id/${id}`).then((response) => {
       this.setState({
         id: id,
         email: response.data.data.email,
@@ -49,7 +50,7 @@ class userInformation extends Component {
   onSubmit(e) {
     e.preventDefault();
     let user = {
-      fullName: this.state.fullName,
+      firstName: this.state.fullName,
       lastName: this.state.lastName,
       dateOfBirth: this.state.dateOfBirth,
       mobile: this.state.mobile,
@@ -58,7 +59,7 @@ class userInformation extends Component {
     };
     console.log("User Data", user);
     axios
-      .put(`http://localhost:8080/user/update/${this.state.id}`, user)
+      .put(`${BASEURL}user/update/${this.state.id}`, user)
       .then((response) => {
         console.log("Data :", response);
         this.state.id = response.data.data._id;
@@ -110,7 +111,7 @@ class userInformation extends Component {
             <form onSubmit={this.onSubmit}>
               <input
                 className="inputfield"
-                placeholder="Full Name"
+                placeholder="First Name"
                 name="fullName"
                 value={this.state.fullName}
                 required

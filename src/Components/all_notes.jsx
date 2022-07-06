@@ -2,6 +2,7 @@ import { Component } from "react";
 import axios from "axios";
 import { Col, Row } from "reactstrap";
 import ViewOfferBackPanelCss from "../Stylesheets/note.css";
+import BASEURL from "../url";
 
 class ViewNotes extends Component {
   constructor(props) {
@@ -22,7 +23,7 @@ class ViewNotes extends Component {
       userId: id,
     });
 
-    axios.get(`http://localhost:8080/note/userid/${id}`).then((response) => {
+    axios.get(`${BASEURL}note/userid/${id}`).then((response) => {
       this.setState({ notes: response.data.data });
     });
   }

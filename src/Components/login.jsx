@@ -5,6 +5,7 @@ import LoginCss from "../Stylesheets/login.css";
 import { Mail } from "react-feather";
 import login from "../Components/actions/auth";
 import { Player, Controls } from "@lottiefiles/react-lottie-player";
+import BASEURL from "../url";
 
 class Login extends Component {
   constructor(props) {
@@ -30,7 +31,7 @@ class Login extends Component {
     console.log(loginForm);
 
     axios
-      .post("http://localhost:8080/login/user", loginForm)
+      .post(`${BASEURL}login/user`, loginForm)
       .then((response) => {
         alert("Login Successful");
         console.log(response.data);

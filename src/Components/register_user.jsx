@@ -4,6 +4,7 @@ import RegisterCss from "../Stylesheets/register.css";
 import axios from "axios";
 import { Player, Controls } from "@lottiefiles/react-lottie-player";
 import { matchRoutes, useParams } from "react-router-dom";
+import BASEURL from "../url";
 
 class Register extends Component {
   constructor(props) {
@@ -46,7 +47,7 @@ class Register extends Component {
     };
     console.log("User Data", user);
     axios
-      .post("http://localhost:8080/user/create", user)
+      .post(`${BASEURL}user/create`, user)
       .then((response) => {
         console.log("Data :", response);
         this.state.id = response.data.data._id;

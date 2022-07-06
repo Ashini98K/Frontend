@@ -4,6 +4,7 @@ import RegisterCss from "../Stylesheets/register.css";
 import axios from "axios";
 import { Player, Controls } from "@lottiefiles/react-lottie-player";
 import { matchRoutes, useParams } from "react-router-dom";
+import BASEURL from "../url";
 
 class UpdateDeleteNote extends Component {
   constructor(props) {
@@ -26,7 +27,7 @@ class UpdateDeleteNote extends Component {
     // this.setState({
     //   userId: id,
     // });
-    axios.get(`http://localhost:8080/note/viewnote/${id}`).then((response) => {
+    axios.get(`${BASEURL}note/viewnote/${id}`).then((response) => {
       this.setState({
         userId: response.data.data.userId,
         noteTittle: response.data.data.noteTittle,
@@ -54,7 +55,7 @@ class UpdateDeleteNote extends Component {
     };
     console.log("User Data", note);
     axios
-      .put(`http://localhost:8080/note/updatenote/${this.state.noteId}`, note)
+      .put(`${BASEURL}note/updatenote/${this.state.noteId}`, note)
       .then((response) => {
         console.log("Data :", response);
         this.state.userId = response.data.data.userId;
@@ -71,7 +72,7 @@ class UpdateDeleteNote extends Component {
 
   onDelete(e) {
     axios
-      .delete(`http://localhost:8080/note/deletenote/${this.state.noteId}`)
+      .delete(`${BASEURL}note/deletenote/${this.state.noteId}`)
       .then((response) => {
         this.navigateToViewNotes(e, this.state.userId);
       })

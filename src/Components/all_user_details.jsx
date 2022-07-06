@@ -4,6 +4,7 @@ import { Button, Col, Row } from "reactstrap";
 import TableCss from "../Stylesheets/table.css";
 import cardImgCss from "../Stylesheets/card.css";
 import RegisterCss from "../Stylesheets/register.css";
+import BASEURL from "../url";
 
 class AllUserDetails extends Component {
   constructor(props) {
@@ -22,7 +23,7 @@ class AllUserDetails extends Component {
 
   componentDidMount() {
     axios
-      .get(`http://localhost:8080/user/get/all`)
+      .get(`${BASEURL}user/get/all`)
       .then((response) => {
         this.setState({ userDetails: response.data.data });
         console.log(this.state.userDetails);
@@ -36,7 +37,7 @@ class AllUserDetails extends Component {
     this.setState({ isSearching: true });
     console.log(this.state.searchValue);
     axios
-      .get(`http://localhost:8080/user/search/${key}`)
+      .get(`${BASEURL}user/search/${key}`)
       .then((response) => {
         this.setState({ userDetails: response.data.data });
         console.log(this.state.userDetails);
@@ -84,7 +85,7 @@ class AllUserDetails extends Component {
                 <row className="d-flex justify-content-right">
                   <button
                     type="submit"
-                    className="searchButton"
+                    className="searchbutton"
                     onClick={(e) => this.navigateToRegisterUser(e)}
                   >
                     Add New User
@@ -100,7 +101,7 @@ class AllUserDetails extends Component {
                   ></input>
                   <button
                     type="submit"
-                    className="searchButton"
+                    className="searchbutton"
                     onClick={(e) => this.onSearch(e, this.state.searchValue)}
                   >
                     Search

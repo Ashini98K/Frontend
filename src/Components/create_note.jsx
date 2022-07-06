@@ -4,6 +4,7 @@ import RegisterCss from "../Stylesheets/register.css";
 import axios from "axios";
 import { Player, Controls } from "@lottiefiles/react-lottie-player";
 import { matchRoutes, useParams } from "react-router-dom";
+import BASEURL from "../url";
 
 class CreateNote extends Component {
   constructor(props) {
@@ -45,7 +46,7 @@ class CreateNote extends Component {
     };
     console.log("User Data", note);
     axios
-      .post("http://localhost:8080/note/create", note)
+      .post(`${BASEURL}note/create`, note)
       .then((response) => {
         console.log("Data :", response);
         this.state.userId = response.data.data.userId;

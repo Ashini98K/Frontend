@@ -112,7 +112,7 @@
   height: 395px;
 }
 
-.searchButton {
+.searchbutton {
   width: 190px;
   height: 7vh;
   margin-top: 1rem;
@@ -130,7 +130,7 @@
   border-width: 0pt;
 }
 
-.searchButton:hover {
+.searchbutton:hover {
   background: #341e71;
   color: #ffffff;
 }
@@ -220,5 +220,28 @@
 
 .saveButton:hover {
   background: #1e7158;
+  color: #ffffff;
+}
+
+.addbtn {
+  width: 190px;
+  height: 7vh;
+  margin-top: 1rem;
+  margin-left: 1rem;
+  background: #ffffff;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 93px;
+  font-family: Share;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 30px;
+  /* identical to box height */
+  text-align: center;
+  border-width: 0pt;
+}
+
+.addbtn:hover {
+  background: #341e71;
   color: #ffffff;
 }
