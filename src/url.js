@@ -1,3 +1,3 @@
-const BASEURL = "http://localhost:8080/";
+const BASEURL = "https://student-management-back.herokuapp.com/";
 
 export default BASEURL;
