@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Col, Row } from "reactstrap";
+import { Button, Col, Row, Modal } from "reactstrap";
 import axios from "axios";
 import LoginCss from "../Stylesheets/login.css";
 import { Mail } from "react-feather";
@@ -19,7 +19,12 @@ class Login extends Component {
       id: "",
       email: "",
       password: "",
+      closeModal: false,
+      userType: "",
+      status: "",
     };
+    this.toggle = this.toggle.bind(this);
+    this.onSuccess = this.onSuccess.bind(this);
   }
 
   onSubmit(e) {
@@ -33,41 +38,54 @@ class Login extends Component {
     axios
       .post(`${BASEURL}login/user`, loginForm)
       .then((response) => {
-        alert("Login Successful");
-        console.log(response.data);
-        let data = response.data;
-        console.log(data);
+        // alert("Login Successful");
+        // this.setState({ closeModal: true });
+        this.setState({
+          closeModal: true,
+          userType: response.data.result.accountType,
+          status: response.data.result.status,
+        });
+        // this.toggle(e);
+        // console.log(response.data);
+        // let data = response.data;
+        // console.log(data);
 
         localStorage.setItem("Login message", response.data.message);
         localStorage.setItem("UserToken", response.data.token);
 
         let userType = response.data.result.accountType;
         let status = response.data.result.status;
-
-        if (status == false) {
-          console.log(status);
-          this.setState = {
-            id: response.data.result._id,
-          };
-          this.navigateToUserInformation(e, response.data.result._id);
-          localStorage.setItem("Login message", response.data.message);
-          localStorage.setItem("UserToken", response.data.token);
-        } else if (userType == "Student") {
-          console.log(userType);
-          this.navigateToNotes(e, response.data.result._id);
-          localStorage.setItem("Login message", response.data.message);
-          localStorage.setItem("UserToken", response.data.token);
-        } else if (userType == "Admin") {
-          console.log(userType);
-          this.navigateAllUserDetails(e);
-          localStorage.setItem("Login message", response.data.message);
-          localStorage.setItem("UserToken", response.data.token);
-        }
+        const val = this.state.closeModal;
+        console.log(val);
+        this.setState({
+          id: response.data.result._id,
+        });
       })
       .catch((error) => {
         console.log(error.message);
         alert("Invalid Login. Please retry again");
       });
+  }
+
+  toggle(e) {
+    this.setState({
+      closeModal: !this.state.closeModal,
+    });
+  }
+
+  onSuccess(e) {
+    this.toggle(e);
+    if (this.state.status == false) {
+      console.log(this.state.status);
+
+      this.navigateToUserInformation(e, this.state.id);
+    } else if (this.state.userType == "Student") {
+      console.log(this.state.userType);
+      this.navigateToNotes(e, this.state.id);
+    } else if (this.state.userType == "Admin") {
+      console.log(this.state.userType);
+      this.navigateAllUserDetails(e);
+    }
   }
 
   navigateToNotes(e, id) {
@@ -116,33 +134,77 @@ class Login extends Component {
             <h3 className="instructions">
               Please enter Email and Password to login
             </h3>
-            <form onSubmit={this.onSubmit}>
-              <input
-                className="input_field"
-                placeholder="Enter Email here"
-                name="email"
-                id="email"
-                value={this.state.email}
-                onChange={this.onChange}
-              ></input>
 
-              <input
-                className="input_field"
-                placeholder="Enter Password here"
-                name="password"
-                id="password"
-                value={this.state.password}
-                onChange={this.onChange}
-                type="password"
-              ></input>
+            <input
+              className="input_field"
+              placeholder="Enter Email here"
+              name="email"
+              id="email"
+              value={this.state.email}
+              onChange={this.onChange}
+            ></input>
 
-              <row className="d-flex justify-content-center">
-                <Col sm="5"></Col>
-                <button className="loginbutton">
-                  <span className="btnTxt">LOGIN</span>
-                </button>
-              </row>
-            </form>
+            <input
+              className="input_field"
+              placeholder="Enter Password here"
+              name="password"
+              id="password"
+              value={this.state.password}
+              onChange={this.onChange}
+              type="password"
+            ></input>
+
+            <row className="d-flex justify-content-center">
+              <Col sm="5"></Col>
+              <button className="loginbutton" onClick={(e) => this.onSubmit(e)}>
+                <span className="btnTxt">LOGIN</span>
+              </button>
+
+              <Modal
+                isOpen={this.state.closeModal}
+                style={{ alignSelf: "center", marginTop: "5vh" }}
+              >
+                <div
+                  style={{
+                    paddingLeft: "3vh",
+                    paddingRight: "3vh",
+                    paddingBottom: "2vh",
+                    paddingTop: "1vh",
+                  }}
+                >
+                  <Row>
+                    <Col md="12">
+                      <h5
+                        style={{
+                          textAlign: "center",
+                          paddingTop: "1vh",
+                          paddingBottom: "-1vh",
+                        }}
+                      >
+                        Succesfully Login
+                      </h5>
+                      <br />
+                      <div>
+                        <Button
+                          className="btn-success"
+                          outline
+                          onClick={(e) => this.onSuccess(e)}
+                          // toggle={this.toggle}
+                          style={{
+                            width: "140px",
+                            height: "40px",
+                            borderRadius: "2vh",
+                            color: "white",
+                          }}
+                        >
+                          OK
+                        </Button>
+                      </div>
+                    </Col>
+                  </Row>
+                </div>
+              </Modal>
+            </row>
           </Col>
           <Col sm="2"></Col>
         </Row>
