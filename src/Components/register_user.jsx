@@ -140,11 +140,7 @@ class Register extends Component {
               </row>
               <row className="d-flex justify-content-center">
                 <Col sm="1"></Col>
-                <button
-                  type="submit"
-                  className="registerButton"
-                  //onClick={(e) => this.navigateToUserType(e, this.state.id)}
-                >
+                <button type="submit" className="registerButton">
                   Save
                 </button>
               </row>

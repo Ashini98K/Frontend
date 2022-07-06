@@ -11,7 +11,7 @@ class Login extends Component {
     super(props);
     this.onSubmit = this.onSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
-    // this.navigateResearcher = this.navigateResearcher.bind(this);
+    this.navigateToNotes = this.navigateToNotes.bind(this);
     this.navigateAllUserDetails = this.navigateAllUserDetails.bind(this);
     this.navigateToUserInformation = this.navigateToUserInformation.bind(this);
     this.state = {
@@ -20,10 +20,6 @@ class Login extends Component {
       password: "",
     };
   }
-  //
-  // componentDidMount(){
-  //     axios.get('http://localhost:5000)
-  // }
 
   onSubmit(e) {
     e.preventDefault();
@@ -57,9 +53,9 @@ class Login extends Component {
           localStorage.setItem("UserToken", response.data.token);
         } else if (userType == "Student") {
           console.log(userType);
-          //   this.navigateAttendee(e);
-          //   localStorage.setItem("Login message", response.data.message);
-          //   localStorage.setItem("UserToken", response.data.token);
+          this.navigateToNotes(e, response.data.result._id);
+          localStorage.setItem("Login message", response.data.message);
+          localStorage.setItem("UserToken", response.data.token);
         } else if (userType == "Admin") {
           console.log(userType);
           this.navigateAllUserDetails(e);
@@ -73,9 +69,9 @@ class Login extends Component {
       });
   }
 
-  //   navigateResearcher(e) {
-  //     window.location = "/sample";
-  //   }
+  navigateToNotes(e, id) {
+    window.location = `/view/notes/${id}`;
+  }
 
   navigateAllUserDetails(e) {
     window.location = "/all/userdetails";
@@ -95,11 +91,6 @@ class Login extends Component {
         <Row>
           <Col sm="1"></Col>
           <Col sm="5">
-            {/* <h1 className="topic">ICAF</h1>
-                <h3 className="subTopic">
-                  International Conference on Application Frameworks
-                </h3> */}
-
             <div>
               <Player
                 autoplay
@@ -125,8 +116,6 @@ class Login extends Component {
               Please enter Email and Password to login
             </h3>
             <form onSubmit={this.onSubmit}>
-              {/*<AiOutlineMail/>*/}
-              {/*<Mail size={25} className='mailIcon'/>*/}
               <input
                 className="input_field"
                 placeholder="Enter Email here"
@@ -135,7 +124,7 @@ class Login extends Component {
                 value={this.state.email}
                 onChange={this.onChange}
               ></input>
-              {/*<Mail size={25}/>*/}
+
               <input
                 className="input_field"
                 placeholder="Enter Password here"
